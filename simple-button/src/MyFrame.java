@@ -3,6 +3,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  * MyFrame
@@ -10,13 +11,22 @@ import javax.swing.JFrame;
 public class MyFrame extends JFrame implements ActionListener {
 
   JButton button;
+  JLabel label;
 
   MyFrame() {
-    ImageIcon icon = new ImageIcon("click.png");
+    ImageIcon clickIcon = new ImageIcon("click.png");
+    ImageIcon broIcon = new ImageIcon("bro.png");
+
+    label = new JLabel();
+    label.setBounds(100, 180, 250, 200);
+    label.setIcon(broIcon);
+    label.setHorizontalAlignment(JLabel.CENTER);
+    label.setVisible(false);
+
     button = new JButton();
     button.setBounds(200, 100, 100, 50);
     button.setText("Click Me");
-    button.setIcon(icon);
+    button.setIcon(clickIcon);
     button.setFocusable(false);
     button.addActionListener(this);
 
@@ -28,12 +38,16 @@ public class MyFrame extends JFrame implements ActionListener {
     this.setVisible(true);
 
     this.add(button);
+    this.add(label);
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == button) {
       System.out.println("Button clicked!");
+      label.setVisible(true);
+      label.setText("Hey you, bro!");
+      button.setEnabled(false);
     }
   }
 }
